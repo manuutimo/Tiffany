@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CV Builder Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    form, .cv-output {
+      flex: 1 1 45%;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cv-section {
+      margin-bottom: 20px;
+    }
+
+    .cv-section h3 {
+      margin-bottom: 5px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CV Builder Application</h1>
+
+  <div class="container">
+    <form id="cvForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="John Doe" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="john@example.com">
+
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" placeholder="+123456789">
+
+      <label for="education">Education</label>
+      <textarea id="education" rows="4" placeholder="Degree, Institution, Year"></textarea>
+
+      <label for="experience">Work Experience</label>
+      <textarea id="experience" rows="4" placeholder="Role, Company, Duration"></textarea>
+
+      <label for="skills">Skills</label>
+      <textarea id="skills" rows="3" placeholder="Skill 1, Skill 2, Skill 3"></textarea>
+
+      <button type="button" onclick="generateCV()">Generate CV</button>
+    </form>
+
+    <div class="cv-output" id="cvPreview">
+      <h2>CV Preview</h2>
+      <div class="cv-section" id="cvName"></div>
+      <div class="cv-section" id="cvContact"></div>
+      <div class="cv-section" id="cvEducation"></div>
+      <div class="cv-section" id="cvExperience"></div>
+      <div class="cv-section" id="cvSkills"></div>
+    </div>
+  </div>
+
+  <script>
+    function generateCV() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const education = document.getElementById('education').value.replace(/\n/g, "<br>");
+      const experience = document.getElementById('experience').value.replace(/\n/g, "<br>");
+      const skills = document.getElementById('skills').value.replace(/\n/g, "<br>");
+
+      document.getElementById('cvName').innerHTML = `<h3>${name}</h3>`;
+      document.getElementById('cvContact').innerHTML = `
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+      `;
+      document.getElementById('cvEducation').innerHTML = `<h3>Education</h3><p>${education}</p>`;
+      document.getElementById('cvExperience').innerHTML = `<h3>Work Experience</h3><p>${experience}</p>`;
+      document.getElementById('cvSkills').innerHTML = `<h3>Skills</h3><p>${skills}</p>`;
+    }
+  </script>
+
+</body>
+</html>
